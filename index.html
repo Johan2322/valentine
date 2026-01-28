@@ -125,13 +125,11 @@ img {
     <img src="check.jpg" alt="Check">
   </div>
 
-  <div id="noSection" class="hidden">
-    <h2>Great you made Kevin spill his famous chili.</h2>
-  </div>
+  <div id="noSection" class="hidden"></div>
 
   <!-- GIF container for NO button -->
   <div id="noGifContainer" class="hidden" style="margin-top: 20px;">
-    <img id="noGif" src="kevin.gif" alt="NO Reaction GIF" style="max-width: 400px; border-radius: 10px;">
+    <img id="noGif" src="" alt="NO Reaction GIF" style="max-width: 400px; border-radius: 10px;">
   </div>
 
 </div>
@@ -198,7 +196,14 @@ yesBtn.addEventListener("click", () => {
 
 // NO button click shows denied section and GIF
 noBtn.addEventListener("click", () => {
-  document.getElementById("noSection").classList.remove("hidden");
+  const noSection = document.getElementById("noSection").classList.remove("hidden");
+
+  const noMessages = [
+    "Great, you made Kevin spill his famous chili!"
+  ];
+
+  const randomMessage = noMessages[Math.floor(Math.random() * noMessages.length)];
+  noSection.innerHTML =  `<h2>${randomMessage}</h2>`;
 
   const gifImg = document.getElementById("noGif");
   gifImg.src = "kevin.gif"; // file in the same folder
@@ -213,6 +218,7 @@ document.getElementById("dmLogo").onclick = () => {
 </script>
 </body>
 </html>
+
 
 
 
