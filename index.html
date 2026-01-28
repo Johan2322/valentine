@@ -151,27 +151,22 @@ function playMichael() {
   document.getElementById("audio1").play();
 }
 
-// NO button chaos - starts moving only on hover with chasing audio
+// NO button chaos - hover activates movement and audio replay
 let noMovingInterval = null;
+let hoveringNo = false;
 
 function moveNo() {
   const btn = document.getElementById("noBtn");
   const card = document.querySelector(".card");
 
   const maxX = card.offsetWidth - btn.offsetWidth;
-  const maxY = 60; // keep within visible area
+  const maxY = 60;
 
   btn.style.left = Math.random() * maxX + "px";
   btn.style.top = Math.random() * maxY + "px";
-
   btn.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
 
-  // Play Michael Scott NO audio
-  const audio = document.getElementById("audio2");
-  audio.currentTime = 0;
-  audio.play();
-
-  // Random office laugh for chaos
+  // Play office laugh sometimes
   if (Math.random() < 0.5) {
     const laugh = document.getElementById("audio3");
     laugh.currentTime = 0;
@@ -179,18 +174,32 @@ function moveNo() {
   }
 }
 
-// Start moving NO button on hover
+// Play NO audio and replay if still hovering
 const noBtn = document.getElementById("noBtn");
-noBtn.addEventListener("mouseenter", () => {
-  if (!noMovingInterval) {
-    noMovingInterval = setInterval(moveNo, 200); // moves every 0.2s
+const audioNo = document.getElementById("audio2");
+
+audioNo.addEventListener('ended', () => {
+  if (hoveringNo) {
+    audioNo.currentTime = 0;
+    audioNo.play();
   }
 });
 
-// Stop interval if NO is clicked
+// Start moving and audio on hover
+noBtn.addEventListener("mouseenter", () => {
+  hoveringNo = true;
+  if (!noMovingInterval) {
+    noMovingInterval = setInterval(moveNo, 200);
+  }
+  audioNo.currentTime = 0;
+  audioNo.play();
+});
+
+// Stop moving interval on click
 noBtn.addEventListener("click", () => {
   clearInterval(noMovingInterval);
   noMovingInterval = null;
+  hoveringNo = false;
 });
 
 // YES clicked
@@ -200,7 +209,7 @@ function yesClicked() {
     particleCount: 200,
     spread: 100,
     shapes: ['square'],
-    colors: ['#ff0000','#0000ff','#ffff00'] // Dunder Mifflin colors
+    colors: ['#ff0000','#0000ff','#ffff00']
   });
 }
 
@@ -209,7 +218,7 @@ function noClicked() {
   document.getElementById("noSection").classList.remove("hidden");
 }
 
-// Dunder Mifflin logo click easter egg
+// Dunder Mifflin logo easter egg
 document.getElementById("dmLogo").onclick = () => {
   confetti({ particleCount: 100, spread: 70 });
   alert("Dunder Mifflin loves you!");
@@ -217,6 +226,3 @@ document.getElementById("dmLogo").onclick = () => {
 </script>
 </body>
 </html>
-
-
-
