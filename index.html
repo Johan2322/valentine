@@ -196,7 +196,8 @@ yesBtn.addEventListener("click", () => {
 
 // NO button click shows denied section and GIF
 noBtn.addEventListener("click", () => {
-  const noSection = document.getElementById("noSection").classList.remove("hidden");
+  const noSection = document.getElementById("noSection");
+  noSection.classList.remove("hidden");
 
   const noMessages = [
     "Great, you made Kevin spill his famous chili!"
@@ -205,8 +206,8 @@ noBtn.addEventListener("click", () => {
   const randomMessage = noMessages[Math.floor(Math.random() * noMessages.length)];
   noSection.innerHTML =  `<h2>${randomMessage}</h2>`;
 
-  const gifImg = document.getElementById("noGif");
-  gifImg.src = "chili.gif"; // file in the same folder
+ // const gifImg = document.getElementById("noGif");
+  //gifImg.src = "chili.gif"; // file in the same folder
   document.getElementById("noGifContainer").classList.remove("hidden");
 });
 
@@ -218,6 +219,7 @@ document.getElementById("dmLogo").onclick = () => {
 </script>
 </body>
 </html>
+
 
 
 
