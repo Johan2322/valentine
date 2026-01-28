@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MANDATORY FUN</title>
+
+<style>
+body {
+  background: repeating-linear-gradient(
+    45deg,
+    #f5f1e6,
+    #f5f1e6 20px,
+    #e8e1d1 20px,
+    #e8e1d1 40px
+  );
+  font-family: "Comic Sans MS", Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  max-width: 750px;
+  margin: auto;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.3);
+}
+
+h1 {
+  color: #1f4aa8;
+  animation: shake 0.4s infinite alternate;
+}
+
+@keyframes shake {
+  from { transform: rotate(-1deg); }
+  to { transform: rotate(1deg); }
+}
+
+button {
+  background: #1f4aa8;
+  color: white;
+  border: none;
+  padding: 14px 22px;
+  margin: 10px;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+button:hover {
+  background: #163a84;
+}
+
+img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+.hidden {
+  display: none;
+}
+
+#noBtn {
+  position: absolute;
+}
+
+.quote {
+  font-style: italic;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+  <h1>🚨 MANDATORY FUN ALERT 🚨</h1>
+  <p><strong>From:</strong> Johan Alvarez<br>
+     <strong>Subject:</strong> LOVE (IMPORTANT)</p>
+
+  <img src="IMG_1178.jpeg">
+
+  <p id="quote" class="quote"></p>
+
+  <button onclick="playMichael()">▶️ Michael Speaks</button>
+
+  <audio id="audio1" src="https://www.myinstants.com/media/sounds/thats-what-she-said.mp3"></audio>
+  <audio id="audio2" src="https://www.myinstants.com/media/sounds/no-god-please-no.mp3"></audio>
+
+  <h2>Will you be my Valentine?</h2>
+
+  <div style="position: relative; height: 80px;">
+    <button onclick="yesClicked()">✅ YES</button>
+    <button id="noBtn" onmouseover="moveNo()" onclick="noClicked()">❌ NO</button>
+  </div>
+
+  <div id="yesSection" class="hidden">
+    <h2>🎉 YOU CHOSE… WISELY 🎉</h2>
+    <p>I am Beyoncé. Always.</p>
+
+    <img src="yayy.jpg">
+
+    
+  </div>
+
+  <div id="noSection" class="hidden">
+   
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+const quotes = [
+  "Well, you always left me satisfied and smiling, so... – Jim Halpert"
+];
+
+document.getElementById("quote").innerText =
+  quotes[Math.floor(Math.random() * quotes.length)];
+
+function playMichael() {
+  document.getElementById("audio1").play();
+}
+
+function moveNo() {
+  const btn = document.getElementById("noBtn");
+  btn.style.left = Math.random() * 200 + "px";
+  btn.style.top = Math.random() * 40 + "px";
+  document.getElementById("audio2").play();
+}
+
+function yesClicked() {
+  document.getElementById("yesSection").classList.remove("hidden");
+  confetti({
+    particleCount: 200,
+    spread: 100
+  });
+}
+
+function noClicked() {
+  document.getElementById("noSection").classList.remove("hidden");
+}
+</script>
+</body>
+</html>
