@@ -111,6 +111,7 @@ img {
 
   <audio id="audio1" src="https://www.myinstants.com/media/sounds/thats-what-she-said.mp3"></audio>
   <audio id="audio2" src="https://www.myinstants.com/media/sounds/no-god-please-no.mp3"></audio>
+  <audio id="audio3" src="you-couldn-t-handle-my-undivided-attention.mp3"></audio>
 
   <h2>Will you be my Valentine?</h2>
 
@@ -180,6 +181,8 @@ yesBtn.addEventListener("click", () => {
   document.getElementById("yesSection").classList.remove("hidden");
   document.getElementById("noSection").classList.add("hidden");
   document.getElementById("noGifContainer").classList.add("hidden");
+  document.getElementById("audio3").play();
+
   confetti({
     particleCount: 200,
     spread: 100,
@@ -226,6 +229,7 @@ document.getElementById("dmLogo").onclick = () => {
 </script>
 </body>
 </html>
+
 
 
 
