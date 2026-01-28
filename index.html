@@ -166,13 +166,11 @@ noBtn.addEventListener("mouseenter", () => {
   // Start moving
   if (!noMovingInterval) {
     noMovingInterval = setInterval(moveNo, 200);
-  }
-
-  // Play audio only if not already playing
-  if (audioNo.paused) {
-    audioNo.loop = true; // loop indefinitely until YES clicked
+     audioNo.loop = true; // loop indefinitely until YES clicked
     audioNo.play();
   }
+
+ 
 });
 
  
@@ -210,4 +208,5 @@ document.getElementById("dmLogo").onclick = () => {
 </script>
 </body>
 </html>
+
 
