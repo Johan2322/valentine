@@ -178,6 +178,8 @@ noBtn.addEventListener("mouseenter", () => {
 // YES button stops audio and movement
 yesBtn.addEventListener("click", () => {
   document.getElementById("yesSection").classList.remove("hidden");
+  document.getElementById("noSection").classList.add("hidden");
+  document.getElementById("noGifContainer").classList.add("hidden");
   confetti({
     particleCount: 200,
     spread: 100,
@@ -192,14 +194,17 @@ yesBtn.addEventListener("click", () => {
   // Stop audio
   audioNo.pause();
   audioNo.currentTime = 0;
+  noClickedAlready = false;
 });
 
 // NO button click shows denied section and GIF
 noBtn.addEventListener("click", () => {
-  clearInterval(noMoving Interval);
+  noClickedAlready = true;
+  clearInterval(noMovingInterval);
   noMovingInterval = null;
   const noSection = document.getElementById("noSection");
   noSection.classList.remove("hidden");
+  document.getElementById("yesSection").classList.add("hidden");
 
   const noMessages = [
     "Great, you made Kevin spill his famous chili!"
@@ -221,6 +226,7 @@ document.getElementById("dmLogo").onclick = () => {
 </script>
 </body>
 </html>
+
 
 
 
