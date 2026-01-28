@@ -111,6 +111,7 @@ img {
 
   <audio id="audio1" src="https://www.myinstants.com/media/sounds/thats-what-she-said.mp3"></audio>
   <audio id="audio2" src="https://www.myinstants.com/media/sounds/no-god-please-no.mp3"></audio>
+  <audio id="audio3" src="https://www.myinstants.com/media/sounds/office-laugh.mp3"></audio>
 
   <h2>Will you be my Valentine?</h2>
 
@@ -159,6 +160,13 @@ function moveNo() {
   btn.style.left = Math.random() * maxX + "px";
   btn.style.top = Math.random() * maxY + "px";
   btn.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
+
+  // Optional random laugh for chaos
+  if (Math.random() < 0.5) {
+    const laugh = document.getElementById("audio3");
+    laugh.currentTime = 0;
+    laugh.play();
+  }
 }
 
 const noBtn = document.getElementById("noBtn");
@@ -171,7 +179,8 @@ noBtn.addEventListener("mouseenter", () => {
     noMovingInterval = setInterval(moveNo, 200);
   }
 
-  audioNo.loop = true;  // loop until YES clicked
+  // Play audio on loop until YES clicked
+  audioNo.loop = true;
   audioNo.currentTime = 0;
   audioNo.play();
 });
@@ -186,9 +195,11 @@ yesBtn.addEventListener("click", () => {
     colors: ['#ff0000','#0000ff','#ffff00']
   });
 
+  // Stop NO button movement
   clearInterval(noMovingInterval);
   noMovingInterval = null;
 
+  // Stop audio
   audioNo.pause();
   audioNo.currentTime = 0;
 }));
@@ -206,3 +217,5 @@ document.getElementById("dmLogo").onclick = () => {
 </script>
 </body>
 </html>
+
+
