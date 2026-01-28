@@ -196,6 +196,8 @@ yesBtn.addEventListener("click", () => {
 
 // NO button click shows denied section and GIF
 noBtn.addEventListener("click", () => {
+  clearInterval(noMoving Interval);
+  noMovingInterval = null;
   const noSection = document.getElementById("noSection");
   noSection.classList.remove("hidden");
 
@@ -219,6 +221,7 @@ document.getElementById("dmLogo").onclick = () => {
 </script>
 </body>
 </html>
+
 
 
 
