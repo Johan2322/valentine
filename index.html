@@ -16,6 +16,7 @@ body {
   font-family: "Comic Sans MS", Arial, sans-serif;
   text-align: center;
   padding: 20px;
+  overflow-x: hidden;
 }
 
 .card {
@@ -25,6 +26,7 @@ body {
   padding: 25px;
   border-radius: 15px;
   box-shadow: 0 10px 25px rgba(0,0,0,.3);
+  position: relative;
 }
 
 h1 {
@@ -47,10 +49,16 @@ button {
   border-radius: 10px;
   cursor: pointer;
   position: relative;
+  transition: all 0.2s;
 }
 
 button:hover {
   background: #163a84;
+  transform: scale(1.1);
+}
+
+#noBtn {
+  position: absolute;
 }
 
 img {
@@ -64,8 +72,19 @@ img {
   display: none;
 }
 
-#noBtn {
+#dmLogo {
+  width: 150px;
   position: absolute;
+  top: -75px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: floatLogo 3s infinite alternate;
+  cursor: pointer;
+}
+
+@keyframes floatLogo {
+  from { transform: translateX(-50%) translateY(0px) rotate(0deg); }
+  to { transform: translateX(-50%) translateY(15px) rotate(15deg); }
 }
 
 .quote {
@@ -77,11 +96,14 @@ img {
 
 <body>
 <div class="card">
+  <!-- Dunder Mifflin Logo -->
+  <img id="dmLogo" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/34/Dunder_Mifflin_Logo.svg/1200px-Dunder_Mifflin_Logo.svg.png" alt="Dunder Mifflin Logo">
+
   <h1>🚨 MANDATORY FUN ALERT 🚨</h1>
   <p><strong>From:</strong> Johan Alvarez<br>
      <strong>Subject:</strong> LOVE (IMPORTANT)</p>
 
-  <img src="IMG_1178.jpeg">
+  <img src="IMG_1178.jpeg" alt="Fun Image">
 
   <p id="quote" class="quote"></p>
 
@@ -89,6 +111,7 @@ img {
 
   <audio id="audio1" src="https://www.myinstants.com/media/sounds/thats-what-she-said.mp3"></audio>
   <audio id="audio2" src="https://www.myinstants.com/media/sounds/no-god-please-no.mp3"></audio>
+  <audio id="audio3" src="https://www.myinstants.com/media/sounds/office-laugh.mp3"></audio>
 
   <h2>Will you be my Valentine?</h2>
 
@@ -100,61 +123,65 @@ img {
   <div id="yesSection" class="hidden">
     <h2>🎉 YOU CHOSE… WISELY 🎉</h2>
     <p>I am Beyoncé. Always.</p>
-
-    <img src="check.jpg">
-
-    
+    <img src="check.jpg" alt="Check">
   </div>
 
   <div id="noSection" class="hidden">
-   
+    <h2>😢 Denied… But Michael Would Approve</h2>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
+// Michael Scott Quotes
 const quotes = [
-  "Well, you always left me satisfied and smiling, so... – Jim Halpert"
+  "Well, you always left me satisfied and smiling, so... – Jim Halpert",
+  "I'm not superstitious, but I am a little stitious. – Michael Scott",
+  "Sometimes I'll start a sentence and I don't even know where it's going. – Michael Scott",
+  "That's what she said. – Michael Scott",
+  "Bears. Beets. Battlestar Galactica. – Jim Halpert"
 ];
 
 document.getElementById("quote").innerText =
   quotes[Math.floor(Math.random() * quotes.length)];
 
+// Michael speaks button
 function playMichael() {
   document.getElementById("audio1").play();
 }
 
+// NO button chaos
 function moveNo() {
   const btn = document.getElementById("noBtn");
   btn.style.left = Math.random() * 200 + "px";
   btn.style.top = Math.random() * 40 + "px";
+  btn.style.transform = `rotate(${Math.random() * 30 - 15}deg)`; // spins a little
   document.getElementById("audio2").play();
+  if(Math.random() < 0.5) document.getElementById("audio3").play();
 }
 
+// YES clicked
 function yesClicked() {
   document.getElementById("yesSection").classList.remove("hidden");
   confetti({
     particleCount: 200,
-    spread: 100
+    spread: 100,
+    shapes: ['square'],
+    colors: ['#ff0000','#0000ff','#ffff00'] // Dunder Mifflin colors
   });
 }
 
+// NO clicked
 function noClicked() {
   document.getElementById("noSection").classList.remove("hidden");
 }
+
+// Dunder Mifflin logo click easter egg
+document.getElementById("dmLogo").onclick = () => {
+  confetti({ particleCount: 100, spread: 70 });
+  alert("Dunder Mifflin loves you!");
+};
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
