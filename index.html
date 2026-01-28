@@ -151,15 +151,29 @@ function playMichael() {
   document.getElementById("audio1").play();
 }
 
-// NO button chaos
+// NO button chaos - fast & hard to click
 function moveNo() {
   const btn = document.getElementById("noBtn");
-  btn.style.left = Math.random() * 200 + "px";
-  btn.style.top = Math.random() * 40 + "px";
-  btn.style.transform = `rotate(${Math.random() * 30 - 15}deg)`; // spins a little
+  const card = document.querySelector(".card");
+
+  const maxX = card.offsetWidth - btn.offsetWidth;
+  const maxY = 60; // keep within visible area
+
+  btn.style.left = Math.random() * maxX + "px";
+  btn.style.top = Math.random() * maxY + "px";
+
+  // Random rotation for fun
+  btn.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
+
+  // Play sounds
   document.getElementById("audio2").play();
-  if(Math.random() < 0.5) document.getElementById("audio3").play();
+  if (Math.random() < 0.5) document.getElementById("audio3").play();
 }
+
+// Make NO button move every 0.2 seconds automatically
+setInterval(() => {
+  moveNo();
+}, 200);
 
 // YES clicked
 function yesClicked() {
@@ -185,3 +199,4 @@ document.getElementById("dmLogo").onclick = () => {
 </script>
 </body>
 </html>
+
