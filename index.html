@@ -115,8 +115,8 @@ img {
   <h2>Will you be my Valentine?</h2>
 
   <div style="position: relative; height: 80px;">
-    <button onclick="yesClicked()">✅ YES</button>
-    <button id="noBtn" onclick="noClicked()">❌ NO</button>
+    <button id="yesBtn">✅ YES</button>
+    <button id="noBtn">❌ NO</button>
   </div>
 
   <div id="yesSection" class="hidden">
@@ -146,9 +146,8 @@ function playMichael() {
   document.getElementById("audio1").play();
 }
 
-// NO button chaos - hover activates movement and audio replay
+// NO button chaos
 let noMovingInterval = null;
-let hoveringNo = false;
 
 function moveNo() {
   const btn = document.getElementById("noBtn");
@@ -160,40 +159,25 @@ function moveNo() {
   btn.style.left = Math.random() * maxX + "px";
   btn.style.top = Math.random() * maxY + "px";
   btn.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
-
-  
 }
 
-// Play NO audio and replay if still hovering
 const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
 const audioNo = document.getElementById("audio2");
 
-audioNo.addEventListener('ended', () => {
-  if (hoveringNo) {
-    audioNo.currentTime = 0;
-    audioNo.play();
-  }
-});
-
-// Start moving and audio on hover
+// Start moving NO and playing audio on hover
 noBtn.addEventListener("mouseenter", () => {
-  hoveringNo = true;
   if (!noMovingInterval) {
     noMovingInterval = setInterval(moveNo, 200);
   }
+
+  audioNo.loop = true;  // loop until YES clicked
   audioNo.currentTime = 0;
   audioNo.play();
 });
 
-// Stop moving interval on click
-noBtn.addEventListener("click", () => {
-  clearInterval(noMovingInterval);
-  noMovingInterval = null;
-  hoveringNo = false;
-});
-
-// YES clicked
-function yesClicked() {
+// Stop movement and audio when YES clicked
+yesBtn.addEventListener("click", () => {
   document.getElementById("yesSection").classList.remove("hidden");
   confetti({
     particleCount: 200,
@@ -201,12 +185,18 @@ function yesClicked() {
     shapes: ['square'],
     colors: ['#ff0000','#0000ff','#ffff00']
   });
-}
+
+  clearInterval(noMovingInterval);
+  noMovingInterval = null;
+
+  audioNo.pause();
+  audioNo.currentTime = 0;
+}));
 
 // NO clicked
-function noClicked() {
+noBtn.addEventListener("click", () => {
   document.getElementById("noSection").classList.remove("hidden");
-}
+});
 
 // Dunder Mifflin logo easter egg
 document.getElementById("dmLogo").onclick = () => {
@@ -216,5 +206,3 @@ document.getElementById("dmLogo").onclick = () => {
 </script>
 </body>
 </html>
-
-
