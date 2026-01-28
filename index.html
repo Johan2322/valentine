@@ -126,12 +126,12 @@ img {
   </div>
 
   <div id="noSection" class="hidden">
-    <h2>😢 Denied… But Michael Would Approve</h2>
+    <h2>Great you made Kevin spill his famous chili.</h2>
   </div>
 
   <!-- GIF container for NO button -->
   <div id="noGifContainer" class="hidden" style="margin-top: 20px;">
-    <img id="noGif" src="" alt="NO Reaction GIF" style="max-width: 400px; border-radius: 10px;">
+    <img id="noGif" src="kevin.gif" alt="NO Reaction GIF" style="max-width: 400px; border-radius: 10px;">
   </div>
 
 </div>
@@ -200,20 +200,8 @@ yesBtn.addEventListener("click", () => {
 noBtn.addEventListener("click", () => {
   document.getElementById("noSection").classList.remove("hidden");
 
-  // GIF URLs
-  const noGifs = [
-   // "https://media.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy.gif", // Michael freakout
-    //"https://media.giphy.com/media/l1J9urw5r3X6e/giphy.gif",       // Dwight facepalm
-    //"https://media.giphy.com/media/xT5LMHxhOfscxPfIfm/giphy.gif"   // Jim reaction
-    "kevin.gif"
-  ];
-
-  // Pick a random GIF
-  const randomGif = noGifs[Math.floor(Math.random() * noGifs.length)];
   const gifImg = document.getElementById("noGif");
-  gifImg.src = randomGif;
-
-  // Show GIF container
+  gifImg.src = "kevin.gif"; // file in the same folder
   document.getElementById("noGifContainer").classList.remove("hidden");
 });
 
@@ -225,6 +213,7 @@ document.getElementById("dmLogo").onclick = () => {
 </script>
 </body>
 </html>
+
 
 
 
