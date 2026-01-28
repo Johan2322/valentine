@@ -111,7 +111,6 @@ img {
 
   <audio id="audio1" src="https://www.myinstants.com/media/sounds/thats-what-she-said.mp3"></audio>
   <audio id="audio2" src="https://www.myinstants.com/media/sounds/no-god-please-no.mp3"></audio>
-  <audio id="audio3" src="https://www.myinstants.com/media/sounds/office-laugh.mp3"></audio>
 
   <h2>Will you be my Valentine?</h2>
 
@@ -134,20 +133,16 @@ img {
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
-// Michael Scott Quotes
-const quotes = [
-  "Well, you always left me satisfied and smiling, so... – Jim Halpert"
-];
-
-document.getElementById("quote").innerText =
-  quotes[Math.floor(Math.random() * quotes.length)];
+// Michael Scott Quote
+const quotes = ["Well, you always left me satisfied and smiling, so... – Jim Halpert"];
+document.getElementById("quote").innerText = quotes[Math.floor(Math.random() * quotes.length)];
 
 // Michael speaks button
 function playMichael() {
   document.getElementById("audio1").play();
 }
 
-// NO button chaos
+// NO button movement
 let noMovingInterval = null;
 
 function moveNo() {
@@ -160,32 +155,23 @@ function moveNo() {
   btn.style.left = Math.random() * maxX + "px";
   btn.style.top = Math.random() * maxY + "px";
   btn.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
-
-  // Optional random laugh for chaos
-  if (Math.random() < 0.5) {
-    const laugh = document.getElementById("audio3");
-    laugh.currentTime = 0;
-    laugh.play();
-  }
 }
 
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const audioNo = document.getElementById("audio2");
 
-// Start moving NO and playing audio on hover
+// Start NO button movement and audio on hover
 noBtn.addEventListener("mouseenter", () => {
   if (!noMovingInterval) {
     noMovingInterval = setInterval(moveNo, 200);
   }
-
-  // Play audio on loop until YES clicked
-  audioNo.loop = true;
+  audioNo.loop = true; // loop until YES clicked
   audioNo.currentTime = 0;
   audioNo.play();
 });
 
-// Stop movement and audio when YES clicked
+// YES button stops audio and movement
 yesBtn.addEventListener("click", () => {
   document.getElementById("yesSection").classList.remove("hidden");
   confetti({
@@ -202,9 +188,9 @@ yesBtn.addEventListener("click", () => {
   // Stop audio
   audioNo.pause();
   audioNo.currentTime = 0;
-}));
+});
 
-// NO clicked
+// NO button click shows denied section
 noBtn.addEventListener("click", () => {
   document.getElementById("noSection").classList.remove("hidden");
 });
@@ -217,5 +203,6 @@ document.getElementById("dmLogo").onclick = () => {
 </script>
 </body>
 </html>
+
 
 
