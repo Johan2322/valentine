@@ -71,6 +71,23 @@ img {
 .hidden {
   display: none;
 }
+  .image-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.image-row img {
+  width: 120px;
+  border-radius: 10px;
+}
+
+.image-row .main-image {
+  width: 260px;
+}
+
 
 #dmLogo {
   width: 150px;
@@ -97,13 +114,19 @@ img {
 <body>
 <div class="card">
   <!-- Dunder Mifflin Logo -->
-  <img id="dmLogo" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/34/Dunder_Mifflin_Logo.svg/1200px-Dunder_Mifflin_Logo.svg.png" alt="Dunder Mifflin Logo">
+  <!--<img id="dmLogo" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/34/Dunder_Mifflin_Logo.svg/1200px-Dunder_Mifflin_Logo.svg.png" alt="Dunder Mifflin Logo"> -->
 
   <h1>🚨 MANDATORY FUN ALERT 🚨</h1>
   <p><strong>From:</strong> Johan Alvarez<br>
      <strong>Subject:</strong> LOVE (IMPORTANT)</p>
 
-  <img src="IMG_1178.jpeg" alt="Fun Image">
+  <!--<img src="IMG_1178.jpeg" alt="Fun Image">-->
+  <div class="image-row">
+  <img src="left.jpg" alt="Left Image">
+  <img src="IMG_1178.jpeg" alt="Main Image" class="main-image">
+  <img src="right.jpg" alt="Right Image">
+</div>
+
 
   <p id="quote" class="quote"></p>
 
@@ -233,6 +256,7 @@ document.getElementById("dmLogo").onclick = () => {
 </script>
 </body>
 </html>
+
 
 
 
